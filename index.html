@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evolve AI Workshop — Prompts</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: #f7f7f5; color: #1a1a1a; padding: 16px; max-width: 480px; margin: 0 auto; }
+h1 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+.subtitle { font-size: 14px; color: #666; margin-bottom: 24px; }
+.exercise { margin-bottom: 24px; }
+.exercise-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: #fff; border: 1px solid #e5e5e3; border-radius: 12px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.exercise-header.active { border-radius: 12px 12px 0 0; border-bottom: none; }
+.exercise-title { font-size: 15px; font-weight: 600; }
+.exercise-tag { font-size: 11px; background: #e8f5e9; color: #2e7d32; padding: 3px 10px; border-radius: 20px; font-weight: 500; }
+.exercise-tag.ex2 { background: #e3f2fd; color: #1565c0; }
+.exercise-tag.ex3 { background: #f3e5f5; color: #7b1fa2; }
+.exercise-tag.cap { background: #fff3e0; color: #e65100; }
+.chevron { font-size: 18px; color: #999; transition: transform 0.2s; }
+.exercise-header.active .chevron { transform: rotate(180deg); }
+.exercise-body { display: none; background: #fff; border: 1px solid #e5e5e3; border-top: none; border-radius: 0 0 12px 12px; padding: 16px; }
+.exercise-body.open { display: block; }
+.prompt-block { background: #fafaf8; border: 1px solid #eee; border-radius: 10px; padding: 14px; margin-bottom: 12px; position: relative; }
+.prompt-label { font-size: 12px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px; }
+.prompt-text { font-size: 14px; line-height: 1.6; white-space: pre-wrap; font-family: 'SF Mono', 'Fira Code', monospace; color: #333; }
+.copy-btn { display: block; width: 100%; margin-top: 10px; padding: 10px; background: #1a1a1a; color: #fff; border: none; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.copy-btn.copied { background: #2e7d32; }
+.note { font-size: 13px; color: #666; line-height: 1.5; margin-bottom: 12px; font-style: italic; }
+.divider { height: 1px; background: #eee; margin: 16px 0; }
+.footer { text-align: center; padding: 20px 0; font-size: 13px; color: #999; }
+.footer a { color: #1565c0; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<h1>Evolve AI Workshop</h1>
+<p class="subtitle">Your prompts — tap to expand each section</p>
+
+<div class="exercise">
+<div class="exercise-header active" onclick="toggle(this)">
+<div>
+<span class="exercise-tag" style="background:#fff3e0;color:#e65100;">Start here</span>
+<div class="exercise-title" style="margin-top:6px">Get set up</div>
+</div>
+<span class="chevron">▼</span>
+</div>
+<div class="exercise-body open">
+
+<div class="prompt-block" style="background:#f0f7ff;border-color:#c8ddf5;">
+<div class="prompt-label">Step 1 — Open AI Studio</div>
+<div class="prompt-text" style="font-family:-apple-system,system-ui,sans-serif;">Go to <strong>aistudio.google.com</strong> on your laptop.
+
+Sign in with any Google account (personal is fine — it's free, no credit card needed).</div>
+</div>
+
+<div class="prompt-block" style="background:#f0f7ff;border-color:#c8ddf5;">
+<div class="prompt-label">Step 2 — Open Build mode</div>
+<div class="prompt-text" style="font-family:-apple-system,system-ui,sans-serif;">Click <strong>"Build"</strong> in the left sidebar.
+
+You'll see three panels: chat on the left, code in the middle, live preview on the right. This is where the magic happens — you'll see your app build in real time.</div>
+</div>
+
+<div class="prompt-block" style="background:#f0f7ff;border-color:#c8ddf5;">
+<div class="prompt-label">Step 3 — You're ready</div>
+<div class="prompt-text" style="font-family:-apple-system,system-ui,sans-serif;">That's it. Type or paste a prompt in the chat panel on the left. Watch the app appear on the right.
+
+To iterate: just keep typing in the same chat. Say what you want changed and it updates live.
+
+To start fresh: click <strong>"New chat"</strong> in the top left.</div>
+</div>
+
+<div class="prompt-block" style="background:#fafaf8;border-color:#eee;">
+<div class="prompt-label">Tip — If something breaks</div>
+<div class="prompt-text" style="font-family:-apple-system,system-ui,sans-serif;">Copy any error message and paste it back into the chat. Say "fix this." Seriously — that's it.
+
+If the conversation gets messy, start a new chat with a better prompt. Fresh start beats patching.</div>
+</div>
+
+</div>
+</div>
+
+<div class="exercise">
+<div class="exercise-header" onclick="toggle(this)">
+<div>
+<span class="exercise-tag">Exercise 1</span>
+<div class="exercise-title" style="margin-top:6px">What's in your fridge?</div>
+</div>
+<span class="chevron">▼</span>
+</div>
+<div class="exercise-body">
+
+<p class="note">Make sure you're in Build mode in AI Studio. Copy each prompt, paste it in, and see what happens.</p>
+
+<div class="prompt-block">
+<div class="prompt-label">Prompt 1 — The simple ask</div>
+<div class="prompt-text" id="p1">I have chicken thighs, rice, a lemon, garlic, and some wilted spinach. What should I make for dinner?</div>
+<button class="copy-btn" onclick="copyPrompt('p1', this)">Copy prompt</button>
+</div>
+
+<div class="prompt-block">
+<div class="prompt-label">Prompt 2 — Add your real life</div>
+<div class="prompt-text" id="p2">Actually, here's my real situation:
+- I have about [YOUR TIME] to cook
+- I can't eat [YOUR RESTRICTIONS]
+- I'm cooking for [NUMBER] people
+- I'm in the mood for something [VIBE — comforting? light? impressive?]
+- Skill level: [be honest]
+- Goal: [just tonight / meal prep for the week / something that makes great leftovers]
+
+Give me 3 options ranked by effort. Include timing for each step so I know what to start first. If I pick a meal-prep option, tell me how to batch it and what keeps well.</div>
+<button class="copy-btn" onclick="copyPrompt('p2', this)">Copy prompt</button>
+</div>
+
+<div class="prompt-block">
+<div class="prompt-label">Prompt 3 — Now make it build</div>
+<div class="prompt-text" id="p3">Stop giving me text. Build me an interactive app instead.
+
+I want to:
+- Check off ingredients I have from a list
+- Set my dietary restrictions and preferences
+- Choose a mode: just tonight / meal prep for the week / great leftovers
+- Choose a vibe: quick & easy, comfort food, impress someone
+- It generates recipe cards with cook time, difficulty rating, step-by-step instructions, and a photo description
+- If I pick meal prep, show a weekly plan and a combined shopping list for anything I'm missing
+
+Make it visually beautiful. Make it feel like a real cooking app.</div>
+<button class="copy-btn" onclick="copyPrompt('p3', this)">Copy prompt</button>
+</div>
+
+<div class="prompt-block">
+<div class="prompt-label">Bonus — Push it further</div>
+<div class="prompt-text" id="p3b">Try adding any of these to your app:
+
+"Only suggest recipes from SeriousEats.com and NYT Cooking — sources I actually trust."
+
+"Remember my preferences: I hate cilantro, I'm dairy-free, and I always have sriracha. Use that every time I come back."
+
+"Add a recipe converter — let me switch between metric and imperial."
+
+"Add a 'use it before it expires' mode where I flag ingredients by freshness."</div>
+<button class="copy-btn" onclick="copyPrompt('p3b', this)">Copy prompt</button>
+</div>
+
+</div>
+</div>
+
+<div class="exercise">
+<div class="exercise-header" onclick="toggle(this)">
+<div>
+<span class="exercise-tag cap">Capstone</span>
+<div class="exercise-title" style="margin-top:6px">Your challenge</div>
+</div>
+<span class="chevron">▼</span>
+</div>
+<div class="exercise-body">
+
+<div class="prompt-block">
+<div class="prompt-label">The challenge</div>
+<div class="prompt-text" id="p-cap">Find something in the world you want to make 10x better. Build it as an interactive app.
+
+RULES:
+• JOYSTICKS — the user clicks, types, drags, or controls something (not just reads)
+• MOAT — what makes yours special?
+• You'll present it with a pitch deck at the end
+
+You just built a cooking app from a fridge check. Now go bigger.</div>
+<button class="copy-btn" onclick="copyPrompt('p-cap', this)">Copy prompt</button>
+</div>
+
+</div>
+</div>
+
+<div class="exercise">
+<div class="exercise-header" onclick="toggle(this)">
+<div>
+<span class="exercise-tag ex2">Exercise 2</span>
+<div class="exercise-title" style="margin-top:6px">Make it real</div>
+</div>
+<span class="chevron">▼</span>
+</div>
+<div class="exercise-body">
+
+<p class="note">Apply the same stair-step to your capstone project.</p>
+
+<div class="prompt-block">
+<div class="prompt-label">Prompt 4 — First shot</div>
+<div class="prompt-text" id="p4">Build me a [your project idea in one sentence].</div>
+<button class="copy-btn" onclick="copyPrompt('p4', this)">Copy prompt</button>
+</div>
+
+<div class="prompt-block">
+<div class="prompt-label">Prompt 5 — The real brief</div>
+<div class="prompt-text" id="p5">Open a new conversation. Answer these in your own words, all in one message:
+
+WHO is this for? (a real person, not "users")
+WHAT can they DO? (3-5 real interactions)
+WHY does it matter? (what's broken today?)
+WHAT SHOULD IT LOOK LIKE? (style, layout, vibe)
+WHAT SHOULD IT NOT DO? (no login screens, no fake data, no features you didn't ask for)
+
+End with: "Build this as a complete interactive app."</div>
+<button class="copy-btn" onclick="copyPrompt('p5', this)">Copy prompt</button>
+</div>
+
+<div class="prompt-block">
+<div class="prompt-label">Prompt 6 — Iteration tips</div>
+<div class="prompt-text" id="p6">Fix it:
+• "The layout should be [specific change]"
+• "The button does X but should do Y"
+• "This section is confusing — simplify it"
+
+Push it:
+• "Add [specific feature]"
+• "Make it work on mobile"
+• "Add animations when [action] happens"
+
+If the conversation gets messy — start a fresh chat. Paste your brief with improvements. Fresh start beats patching.</div>
+<button class="copy-btn" onclick="copyPrompt('p6', this)">Copy prompt</button>
+</div>
+
+</div>
+</div>
+
+<div class="exercise">
+<div class="exercise-header" onclick="toggle(this)">
+<div>
+<span class="exercise-tag ex3">Exercise 3</span>
+<div class="exercise-title" style="margin-top:6px">Ship it — slides</div>
+</div>
+<span class="chevron">▼</span>
+</div>
+<div class="exercise-body">
+
+<p class="note">One person on slides. Other two polish the app. Divide and conquer.</p>
+
+<div class="prompt-block">
+<div class="prompt-label">Prompt 7 — Pitch deck</div>
+<div class="prompt-text" id="p7">Create a pitch deck as a single interactive HTML presentation with clean, visual slides.
+
+THE PROBLEM: [what's broken — one sentence]
+OUR APP: [what we built — one sentence]
+HOW IT WORKS: [3 things the user can do]
+WHY IT'S SPECIAL: [your moat]
+WHAT WE LEARNED: [one surprise from building this]
+
+5 slides. Big fonts. Minimal text. Make it look professional.</div>
+<button class="copy-btn" onclick="copyPrompt('p7', this)">Copy prompt</button>
+</div>
+
+</div>
+</div>
+
+<div class="divider"></div>
+
+<div class="footer">
+<p>Evolve AI Build Demo Workshop</p>
+<p style="margin-top:8px"><a href="https://anthropic.skilljar.com/ai-fluency-framework-foundations">Anthropic AI Fluency Course →</a></p>
+</div>
+
+<script>
+function toggle(header) {
+  var body = header.nextElementSibling;
+  var isOpen = body.classList.contains('open');
+
+  document.querySelectorAll('.exercise-body').forEach(function(b) { b.classList.remove('open'); });
+  document.querySelectorAll('.exercise-header').forEach(function(h) { h.classList.remove('active'); });
+
+  if (!isOpen) {
+    body.classList.add('open');
+    header.classList.add('active');
+  }
+}
+
+function copyPrompt(id, btn) {
+  var text = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() {
+      btn.textContent = 'Copy prompt';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+
+</body>
+</html>
