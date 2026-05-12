@@ -1,1 +1,1 @@
-# EvolveAIWorkshop-Q2-2026
+# RocketITBuildAnApp-Q2-2026
